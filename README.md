@@ -141,11 +141,3 @@ Suporte e troubleshooting
 
 - Porta em uso: se `3000` já estiver ocupada, encerre o processo que a utiliza ou exporte `PORT` no `backend/.env`.
 - Erros de CORS: verifique origem no navegador e se o servidor está rodando em `http://localhost:3000`.
-
-Contribuição
-
-Pull requests são bem-vindos. Para alterações no backend siga boas práticas: testes, validação de entrada e análise de segurança.
-
-Licença
-
-Coloque aqui a licença desejada antes de publicar (ex.: MIT).
