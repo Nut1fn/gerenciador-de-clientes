@@ -1,0 +1,12 @@
+{
+  "name": "banco-de-dados-clientes",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "backend"
+  ],
+  "scripts": {
+    "setup": "npm install",
+    "start": "node backend/server.js"
+  }
+}

@@ -1,0 +1,147 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    background: #0f1720;
+    color: #e6eef6;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: #f1f5f9;
+}
+
+.card {
+    background: #0b1220;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px #00000099;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.card input {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    background: #071020;
+    color: #e6eef6;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 6px;
+}
+
+.card button {
+    padding: 8px 12px;
+    background: #1f6feb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.card button.secondary {
+    background: #374151;
+}
+
+#auth {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.top button {
+    background: #ffffff;
+}
+
+#clients-list {
+    list-style: none;
+    padding: 0;
+}
+
+#clients-list li {
+    padding: 8px 6px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#clients-list li .client-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+#clients-list li .client-info img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 1px;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+#clients-list li .client-btns {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+}
+
+.message {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: #111827;
+    color: #e6eef6;
+    padding: 10px 12px;
+    border-radius: 8px;
+    display: none;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.message.error {
+    background: #4b1012;
+    color: #ffd6d6;
+    border-color: rgba(255, 77, 79, 0.2);
+}
+
+.message.success {
+    background: #052e14;
+    color: #c7ffd6;
+    border-color: rgba(40, 167, 69, 0.12);
+}
+
+.btn-link {
+    display: inline-block;
+    padding: 8px 12px;
+    background: #0f1724;
+    color: #cfe8ff;
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.btn-link:hover {
+    opacity: 0.95;
+}
+
+/* inputs de arquivo */
+input[type=file] {
+    color: #cfe8ff;
+}

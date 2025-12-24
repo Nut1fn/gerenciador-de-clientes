@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Sistema de Gestão de Clientes</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+	<div class="container">
+		<h1>Sistema de Gestão de Clientes</h1>
+        <!-- pagina inicial de boas vindas -->
+		<div id="welcome" class="card">
+			<h2>Bem-vindo ao Sistema</h2>
+			<p>Gerencie seus clientes de forma simples.</p>
+				<div style="display:flex; gap:8px;">
+					<a class="btn-link" href="#register">Criar conta</a>
+					<a class="btn-link" href="#login">Login</a>
+				</div>
+		</div>
+        <!-- area para criar a conta -->
+		<div id="auth" style="display:none;">
+			<div id="card-register" class="card" style="display:none;">
+				<h2>Registrar</h2>
+				<input id="reg-username" placeholder="Usuário" />
+				<input id="reg-password" type="password" placeholder="Senha" />
+				<div style="display:flex; gap:8px; margin-top:8px;">
+					<button type="button" id="btn-register">Criar conta</button>
+					<button type="button" id="btn-back-register">Voltar</button>
+				</div>
+			</div>
+            <!-- area de login -->
+			<div id="card-login" class="card" style="display:none;">
+				<h2>Entrar</h2>
+				<input id="login-username" placeholder="Usuário" />
+				<input id="login-password" type="password" placeholder="Senha" />
+				<div style="display:flex; gap:8px; margin-top:8px;">
+					<button type="button" id="btn-login">Entrar</button>
+					<button type="button" id="btn-back-login">Voltar</button>
+				</div>
+			</div>
+		</div>
+        <!-- visor de quem esta logado -->
+		<div id="app" style="display:none;">
+			<div class="top">
+				<div>Logado como <span id="username"></span></div>
+				<button id="btn-logout">Sair</button>
+			</div>
+            <!-- area de gerenciamento de clientes -->
+			<div class="card">
+				<h2>Clientes <button id="btn-toggle-add" title="Adicionar">+</button></h2>
+				<div style="display:flex; gap:8px; margin-bottom:8px; align-items:center;">
+					<input id="search-q" placeholder="Pesquisar clientes..." style="flex:1; padding:8px;" />
+					<select id="search-field">
+						<option value="any">Todos</option>
+						<option value="name">Nome</option>
+						<option value="email">Email</option>
+						<option value="phone">Telefone</option>
+					</select>
+					<button type="button" id="btn-search">Buscar</button>
+				</div>
+				<div id="add-form" style="display:none; margin-bottom:12px;">
+					<input id="client-name" placeholder="Nome" />
+					<input id="client-email" placeholder="Email (opcional)" />
+					<input id="client-phone" placeholder="Telefone (opcional)" />
+					<div style="margin-top:6px;">
+						<label>Foto (opcional): <input type="file" id="client-photo" accept="image/*" /></label>
+					</div>
+					<button id="btn-add-client">Adicionar</button>
+				</div>
+
+				<ul id="clients-list"></ul>
+			</div>
+		</div>
+        
+		<div id="message" class="message"></div>
+	</div>
+    <!-- link para o arquivo js -->
+	<script src="app.js"></script>
+</body>
+</html>
