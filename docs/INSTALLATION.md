@@ -1,43 +1,31 @@
-Instalação e execução (desenvolvimento) — passo a passo
+Instalação e Execução (Passo a Passo)
 
-Este guia mostra como preparar e executar o projeto localmente, cobrindo Windows e macOS/Linux.
+Pré-requisitos
+
+- Node.js 16+ e npm instalados.
+- Git (opcional, para clonar o repositório).
 
 1) Clonar o repositório
 
 ```bash
 git clone <URL-DO-REPOSITORIO>
-cd "projeto 2"
+cd "banco de dados clientes"
 ```
 
-2) Preparar variáveis de ambiente
+2) Instalar dependências (modo simplificado)
 
-Copie o arquivo de exemplo e edite `backend/.env`:
+No Windows (PowerShell):
 
-Windows (PowerShell):
+npm install
+
+3) Preparar variáveis de ambiente
+
+Copie o arquivo de exemplo em `backend/.env.example` para `backend/.env` e defina uma chave forte para `JWT_SECRET`:
 
 ```powershell
 copy backend\.env.example backend\.env
-notepad backend\.env
+# edite backend\.env e substitua JWT_SECRET
 ```
-
-macOS/Linux:
-
-```bash
-cp backend/.env.example backend/.env
-nano backend/.env
-```
-
-Defina `JWT_SECRET` com uma string forte.
-
-3) Instalar dependências
-
-No root do repositório (recomendado):
-
-```bash
-npm install
-```
-
-Isso instalará as dependências do `backend` graças ao `package.json` na raiz que usa workspaces.
 
 4) Iniciar o servidor
 
@@ -45,28 +33,50 @@ Isso instalará as dependências do `backend` graças ao `package.json` na raiz 
 npm start
 ```
 
-Ou no Windows use o script de conveniência `run.ps1`:
+5) Acessar o frontend
 
-```powershell
-.\run.ps1
+Abra no navegador:
+
+```
+http://localhost:3000/
 ```
 
-5) Acessar a aplicação
+Uso (fluxo básico)
 
-Abra seu navegador em `http://localhost:3000/`.
+- Criar conta: clique em "Criar conta" e preencha `Usuário` e `Senha` (mínimo 4 caracteres; senha deve conter letras e números).
+- Login: clique em "Login" e forneça credenciais; ao autenticar, um token JWT é armazenado no `localStorage`.
+- Gerenciar clientes: após logar você pode adicionar, editar, excluir e pesquisar clientes.
 
-Observações e dicas
+API - endpoints principais
 
-- Dados persistem em `backend/data.json`.
-- Se a porta `3000` estiver ocupada: exporte uma variável `PORT` no `backend/.env` (ex.: `PORT=4000`) ou finalize o processo que usa `3000`.
-- Para produção: use um process manager (PM2, systemd) e um reverse-proxy (nginx) com TLS.
+- `POST /api/register` — corpo JSON: `{ "username": "nome", "password": "senha" }`.
+- `POST /api/login` — corpo JSON: `{ "username": "nome", "password": "senha" }` → resposta `{ "token": "..." }`.
+- `GET /api/clients` — cabeçalho: `Authorization: Bearer <token>` → lista de clientes do usuário.
+- `POST /api/clients` — cria cliente: body `{ name, email, phone }`.
+- `POST /api/clients/:id/photo` — envia foto (multipart/form-data, campo `photo`).
+- `PUT /api/clients/:id` — atualiza campos do cliente.
+- `DELETE /api/clients/:id` — remove cliente.
 
-Erros comuns
+Arquitetura e funcionamento
 
-- `EADDRINUSE`: porta em uso — veja o PID com `netstat`/`ss` e encerre.
-- `npm install` falha: verifique versão do Node e permissões (no Windows rode Powershell como administrador se necessário).
+- Autenticação: o backend gera um JWT com `userId` e `username` e valida em cada chamada protegida.
+- Persistência: dados são gravados em `backend/data.json` (estrutura simples para demonstração).
+- Uploads: fotos são armazenadas em `backend/uploads` e servidas em `/uploads`.
+- Offline: quando o backend está inacessível, o frontend usa `localStorage` para armazenar usuários e clientes localmente; ações offline são isoladas ao navegador do usuário.
 
-Próximos passos
+Segurança (resumo)
 
-- Consulte `docs/USER_GUIDE.md` para uso da aplicação.
-- Consulte `docs/SECURITY.md` para recomendações antes de publicar em produção.
+- `helmet` adiciona headers HTTP seguros.
+- `express-rate-limit` aplicado em rotas de autenticação.
+- Uploads limitados (2MB) e aceitando apenas imagens.
+- `JWT_SECRET` lido a partir de `backend/.env` (não colocar secrets no repositório).
+
+Mais detalhes e guias
+- Guia de instalação detalhado: `docs/INSTALLATION.md`
+- Guia do usuário com passo-a-passo: `docs/USER_GUIDE.md`
+- Medidas de segurança e recomendações: `docs/SECURITY.md`
+
+Suporte e troubleshooting
+
+- Porta em uso: se `3000` já estiver ocupada, encerre o processo que a utiliza ou exporte `PORT` no `backend/.env`.
+- Erros de CORS: verifique origem no navegador e se o servidor está rodando em `http://localhost:3000`.
