@@ -9,7 +9,7 @@ Pré-requisitos
 
 ```bash
 git clone <URL-DO-REPOSITORIO>
-cd "banco de dados clientes"
+cd "gerenciador-de-clientes"
 ```
 
 2) Instalar dependências (modo simplificado)
